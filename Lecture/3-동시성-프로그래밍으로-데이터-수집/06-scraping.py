@@ -12,7 +12,7 @@ async def img_downloader(session, img):
 
     # 다운받을 폴더 생성
     try:
-        os.mkdir("./images")
+        os.mkdir("images")
     except FileExistsError:
         pass
 
@@ -43,6 +43,7 @@ async def main():
     BASE_URL = "https://openapi.naver.com/v1/search/image"
     keyword = "cat"
     urls = [f"{BASE_URL}?query={keyword}&display=20&start={1+ i*20}" for i in range(10)]
+    ## ssl 오류로 인해 connector 추가
     async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False)) as session:
         await asyncio.gather(*[fetch(session, url, i) for i, url in enumerate(urls)])
 
