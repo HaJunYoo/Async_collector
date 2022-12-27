@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>콜렉터</title>
+    <title>{{title}}</title>
     <link href="https://unpkg.com/mvp.css" rel="stylesheet" />
   </head>
   <style>
@@ -36,7 +36,11 @@
         {% for book in books %}
         <div>
           <img src="{{book.image}}" width="150px" height="200px" />
-          <p>{{book.title}}</p>
+          <p>
+            {% if book.title|length > 12 %}
+              {{book.title[:12]}}
+            {% endif %}
+          </p>
           <p>
             {% if book.publisher|length > 10 %}
             <!--  -->
